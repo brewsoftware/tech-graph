@@ -38,5 +38,10 @@ addons:
   code_climate:
     repo_token: $CODE_CLIMATE
 
-after_success:
-  - firebase-ci deploy -s # deploy without CI actions since createConfig is called earlier 
+deploy:
+  provider: releases
+  api_key: $GIT_TOKEN
+  file: "wp-plugin/brew_tech_graph.zip"
+  skip_cleanup: true
+  on:
+    tags: true
