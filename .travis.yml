@@ -40,8 +40,9 @@ addons:
 
 deploy:
   provider: releases
-  api_key: $GIT_TOKEN
+  api_key: ${GIT_TOKEN}
   file: "wp-plugin/brew_tech_graph.zip"
   skip_cleanup: true
   on:
+    all_branches: true
     tags: true
