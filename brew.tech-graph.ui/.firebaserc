@@ -1,0 +1,42 @@
+{
+  "projects": {
+    "master": "maintestapp",
+    "prod": "maintestapp"
+  },
+  "ci": {
+    "createConfig": {
+      "master": {
+        "version": "${npm_package_version}",
+        "env": "development",
+        "firebase": {
+          "apiKey": "AIzaSyDwjQE7iGbfQjJm2fc20sHU8b5esMKayAk",
+          "authDomain": "maintestapp.firebaseapp.com",
+          "databaseURL": "https://maintestapp.firebaseio.com",
+          "projectId": "maintestapp",
+          "storageBucket": "maintestapp.appspot.com"
+        },
+        "reduxFirebase": {
+          "userProfile": "users",
+          "enableLogging": false,
+          "updateProfileOnLogin": false
+        }
+      },
+      "prod": {
+        "version": "${npm_package_version}",
+        "env": "production",
+        "firebase": {
+          "apiKey": "AIzaSyDwjQE7iGbfQjJm2fc20sHU8b5esMKayAk",
+          "authDomain": "maintestapp.firebaseapp.com",
+          "databaseURL": "https://maintestapp.firebaseio.com",
+          "projectId": "maintestapp",
+          "storageBucket": "maintestapp.appspot.com"
+        },
+        "reduxFirebase": {
+          "userProfile": "users",
+          "enableLogging": false,
+          "updateProfileOnLogin": false
+        }
+      }
+    }
+  }
+}
