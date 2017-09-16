@@ -68,6 +68,6 @@
     "normalize.css": "^4.0.0",
     "react": "^15.0.0",
     "react-d3-graph": "^0.1.0",
-    "react-dom": "^15.0.0",
+    "react-dom": "^15.0.0"
   }
 }
