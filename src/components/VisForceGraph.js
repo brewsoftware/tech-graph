@@ -1,94 +1,139 @@
 import React from 'react';
 import { InteractiveForceGraph, ForceGraphNode, ForceGraphLink } from 'react-vis-force';
-const data = [
-    {source: 'Jason Turner' , target: 'Techniques'},
-      {source: 'Techniques' , target:  'Management', color:'red'},
-        {source: 'Management', target: 'Waterfall', color:'red', type:'leaf'},
-        {source: 'Management', target: 'Agile' , color:'red', type:'leaf'},
-      {source: 'Techniques' , target:  'Architecure', color:'red'},
-        {source: 'Architecure', target: 'CQRS' , color:'red', type:'leaf'},
-        {source: 'Architecure', target: 'CAP Theorem', color:'red', type:'leaf'},
-        {source: 'Architecure', target: 'Eventual Consistency', color:'red', type:'leaf'},
-        {source: 'Architecure', target: 'OWASP', color:'red', type:'leaf'},
-        {source: 'Architecure', target: 'Functional', color:'red', type:'leaf'},
-        {source: 'Architecure', target: 'Object Oriented', color:'red', type:'leaf'},
-    {source: 'Jason Turner' , target:  'Tools', color:'green'},
-      {source: 'Tools', target: 'CI/CD', color:'green', type:'leaf'},
-      {source: 'Tools', target: 'Development', color:'green', type:'leaf'},
-    {source: 'Jason Turner' , target:  'Language & Framework', color:'blue'},
-      {source: 'Language & Framework', color:'blue', target: '.Net'},,
-        {source: '.Net', color:'blue', target: 'Data'},
-          {source: 'Data', color:'blue', target:  'Dapper' ,type:'leaf'},
-          {source: 'Data', color:'blue', target:  'EF',type:'leaf'},
-          {source: 'Data', color:'blue', target:  'NHibernate',type:'leaf'},
-      {source: 'Language & Framework', color:'blue', target: 'Javascript'},
-        {source: 'Javascript', color:'blue', target: 'ES6',type:'leaf'},
-        {source: 'Javascript', color:'blue', target: 'Typescript',type:'leaf'},
-        {source: 'Javascript', color:'blue', target: 'UI'},
-          {source: 'UI', color:'blue', target: 'React'},
-            {source: 'React', color:'blue', target:  'Redux',type:'leaf'},
-            {source: 'React', color:'blue', target:  'Jest',type:'leaf'},
-          {source: 'UI', color:'blue', target: 'Vaadin',type:'leaf'},
-          {source: 'UI', color:'blue', target: 'Angular2+',type:'leaf'},
-          {source: 'UI', color:'blue', target: 'CSS3'},
-            {source: 'CSS3', color:'blue', target:  'SCSS/SASS',type:'leaf'},
-            {source: 'CSS3', color:'blue', target:  'Compass',type:'leaf'},
-            {source: 'CSS3', color:'blue', target:  'BEM',type:'leaf'},
-            {source: 'CSS3', color:'blue', target:  'CSS Modules',type:'leaf'},
-        {source: 'Javascript', color:'blue', target: 'Node'},
-          {source: 'Node', color:'blue', target: 'Express',type:'leaf'},
-        {source: 'Javascript', color:'blue', target: 'CI'},
-          {source: 'CI', color:'blue', target: 'Webpack',type:'leaf'},
-          {source: 'CI', color:'blue', target: 'gulp',type:'leaf'},
-
-    {source: 'Jason Turner' , target:  'Platform', color:'orange'},
-      {source: 'Platform' , target:  'DevOps', color:'orange',type:'leaf'},
-      {source: 'Platform' , target: 'Databases', color:'orange',type:'leaf'},
-      {source: 'Platform' , target: 'Dev Ops', color:'orange',type:'leaf'},
-        {source: 'Dev Ops' , target: 'Yeomon', color:'orange',type:'leaf'},
-        {source: 'Dev Ops' , target: 'Team City', color:'orange',type:'leaf'},
-        {source: 'Dev Ops' , target: 'Octopus Deploy', color:'orange',type:'leaf'},
-        {source: 'Dev Ops' , target: 'Ansible', color:'orange',type:'leaf'},
-        {source: 'Dev Ops' , target: 'Code Deploy', color:'orange',type:'leaf'},
-      {source: 'Platform' , target:'Databases', color:'orange',type:'leaf'},
-        {source: 'Databases' , target: 'RDBMS', color:'orange',type:'leaf'},
-          {source: 'RDBMS' , target:  'MSSql', color:'orange',type:'leaf'},
-          {source: 'RDBMS' , target:  'SSRS', color:'orange',type:'leaf'},
-          {source: 'RDBMS' , target:  'My Sql', color:'orange',type:'leaf'},
-          {source: 'RDBMS' , target:  'Postgressql', color:'orange',type:'leaf'},
-        {source: 'Databases' , target: 'NoSQL', color:'orange',type:'leaf'},
-          {source: 'NoSQL' , target: 'RethinkDB', color:'orange',type:'leaf'},
-          {source: 'NoSQL' , target: 'CouchDB', color:'orange',type:'leaf'},
-          {source: 'NoSQL' , target: 'ElasticSearch', color:'orange',type:'leaf'},
-          {source: 'NoSQL' , target: 'ArangoDB', color:'orange' ,type:'leaf'}
 
 
-];
-
-var nodeList = [];
-
-nodeList.push(<ForceGraphNode node={{ id: 'Jason Turner', label: 'Jason Turner' }} fill="black" />);
-
-data.map((node, index) => {
-  nodeList.push(<ForceGraphNode node={{ id: node.target, label: node.target }} fill={node.color} showLabel={node.type==='leaf'}  />);
-});
-
-var vertexList = [];
-data.map((node, index) => {
-  vertexList.push(<ForceGraphLink link={{ source: node.source, target: node.target }} />);
-});
 export class TechGraph extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount(){
+    this.setState(this.getInitialState());
+  }
+  getInitialState = () => {
+    let state = {};
+    state.data = [
+      {source: 'Jason Turner' , target: 'Techniques'},
+        {source: 'Techniques' , target:  'Management'},
+          {source: 'Management', target: 'Waterfall'},
+          {source: 'Management', target: 'Agile' },
+        {source: 'Techniques' , target:  'Architecure'},
+          {source: 'Architecure', target: 'CQRS'},
+          {source: 'Architecure', target: 'CAP Theorem'},
+          {source: 'Architecure', target: 'Eventual Consistency'},
+          {source: 'Architecure', target: 'OWASP'},
+          {source: 'Architecure', target: 'Functional'},
+          {source: 'Architecure', target: 'Object Oriented'},
+      {source: 'Jason Turner' , target:  'Tools'},
+        {source: 'Tools', target: 'CI/CD'},
+        {source: 'Tools', target: 'Development'},
+      {source: 'Jason Turner' , target: 'Language & Framework'},
+        {source: 'Language & Framework', target:'.Net'},
+          {source: '.Net', target: 'Data'},
+            {source: 'Data', target: 'Dapper'},
+            {source: 'Data', target: 'EF',},
+            {source: 'Data', target: 'NHibernate'},
+        {source: 'Language & Framework', target: 'Javascript'},
+          {source: 'Javascript', target: 'ES6'},
+          {source: 'Javascript', target: 'Typescript'},
+          {source: 'Javascript', target: 'UI'},
+            {source: 'UI', target: 'React'},
+              {source: 'React', target:  'Redux'},
+              {source: 'React', target:  'Jest'},
+            {source: 'UI', target: 'Vaadin'},
+            {source: 'UI', target: 'Angular2+'},
+            {source: 'UI', target: 'CSS3'},
+              {source: 'CSS3', target:  'SCSS/SASS'},
+              {source: 'CSS3', target:  'Compass'},
+              {source: 'CSS3', target:  'BEM'},
+              {source: 'CSS3', target:  'CSS Modules'},
+          {source: 'Javascript', target: 'Node'},
+            {source: 'Node', target: 'Express'},
+          {source: 'Javascript', target: 'CI'},
+            {source: 'CI', target: 'Webpack'},
+            {source: 'CI', target: 'gulp'},
+      {source: 'Jason Turner' , target:  'Platform'},
+        {source: 'Platform' , target:  'DevOps'},
+        {source: 'Platform' , target: 'Databases'},
+        {source: 'Platform' , target: 'Dev Ops'},
+          {source: 'Dev Ops' , target: 'Yeomon'},
+          {source: 'Dev Ops' , target: 'Team City'},
+          {source: 'Dev Ops' , target: 'Octopus Deploy'},
+          {source: 'Dev Ops' , target: 'Ansible'},
+          {source: 'Dev Ops' , target: 'Code Deploy'},
+        {source: 'Platform' , target:'Databases'},
+          {source: 'Databases' , target: 'RDBMS'},
+            {source: 'RDBMS' , target:  'MSSql'},
+            {source: 'RDBMS' , target:  'SSRS'},
+            {source: 'RDBMS' , target:  'My Sql'},
+            {source: 'RDBMS' , target:  'Postgressql'},
+          {source: 'Databases' , target: 'NoSQL'},
+            {source: 'NoSQL' , target: 'RethinkDB'},
+            {source: 'NoSQL' , target: 'CouchDB'},
+            {source: 'NoSQL' , target: 'ElasticSearch'},
+            {source: 'NoSQL' , target: 'ArangoDB'}
+        ];
+
+    state.colourLightPrimary = "#06AED5"
+    state.colourLightSecondary = "#E2DBBE"
+    state.colourDarkPrimary = "#F0B67F"
+    state.colourDarkSecondary = "#FE5F55"
+    state.colourAltPrimary = "#D6D1B1"
+    state.colourList = [state.colourLightPrimary,state.colourLightSecondary,state.colourDarkPrimary,state.colourDarkSecondary,state.colourAltPrimary];
+
+    state.data.map( x=> x.color = 'red');
+    // colour each node appropriate to the branch that they are on
+    state.data.filter(x=> x.source === "Jason Turner").map((x, index) => {
+      x.color = state.colourList[index % state.colourList.length];
+    });
+
+    for(var i =0; i< 5; i++){
+      state.data.filter(x => x.color !=='red').map((x, index) => {
+        state.data.filter(y => y.source == x.target).map( z => {
+          z.color = x.color;
+        });
+      });
+    }
+
+    state.nodeList = [];
+    state.nodeList.push(<ForceGraphNode key='-1' node={{ id: 'Jason Turner', label: 'Jason Turner' }} fill="black" />);
+
+    state.data.map((node, index) => {
+      state.nodeList.push(<ForceGraphNode key={index}  node={{ id: node.target, label: node.target }} fill={node.color}  />);
+    });
+
+    state.vertexList = [];
+    state.data.map((node, index) => {
+      state.vertexList.push(<ForceGraphLink key={index+100} link={{source: node.source, target: node.target }} />);
+    });
+    return state;
+  }
+  nodeSelected = (node) => {
+    let state = this.state;
+    // TODO: Re-colour based on the selection or do something else funky.
+    state.nodeList.filter(x=>x.source === node.source || x.target === node.source).map((y, index)=>{
+
+    });
+    this.setState(state);
+
+    this.setState(this.state);
+
+  }
+
   render() {
+    if(!this.state){
+      return (<div> </div>);
+    }
     return (
       <div>
       <InteractiveForceGraph
-        simulationOptions={{ height: 300, width: 800, animate: true, radiusMargin:200 }}
+        simulationOptions={{ height: 500, width: 500, animate: true, alphaTarget:0.9, alphaDecay:1.1, velocityTarget:6, strength:{ x:0.02,y:0.02} }}
         labelAttr="label"
-        onSelectNode={(node) => console.log(node)}
-
-        highlightDependencies>
-        {nodeList}
-        {vertexList}
+        onSelectNode={this.nodeSelected}
+        highlightDependencies
+        showLabels >
+        {this.state.nodeList}
+        {this.state.vertexList}
       </InteractiveForceGraph>
       </div>
     );
