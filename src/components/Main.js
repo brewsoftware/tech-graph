@@ -2,7 +2,7 @@ require('normalize.css/normalize.css');
 require('styles/App.css');
 
 import React from 'react';
-import {TechGraph} from './Graph';
+import {TechGraph} from './VisForceGraph';
 let yeomanImage = require('../images/yeoman.png');
 
 class AppComponent extends React.Component {

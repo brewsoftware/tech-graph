@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 function brew_tech_graph_scripts() {
 global $post;
     if(has_shortcode( $post->post_content, 'brew_tech_graph') ) {
-        wp_enqueue_script( 'brew_tech_graph_script', plugins_url() . '/dist/assets/app.js', array(), '1.0.0', true );
+        wp_enqueue_script( 'brew_tech_graph_script', plugins_url() . '/brew_tech_graph/app.js', array(), '1.0.0', true );
     }
 }
 

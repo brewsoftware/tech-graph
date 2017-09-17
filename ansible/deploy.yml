@@ -1,18 +1,25 @@
 ---
 - hosts: wordpress
   sudo: yes
-  
+
   tasks:
     - name: ensure directory exists
-      file: 
+      file:
         path: '/var/www/vhosts/brewsoftware.com.au/httpdocs/wp-content/plugins/brew_tech_graph'
         owner: brewsoftware
         group: psacln
-        mode: 0644
+        mode: 0755
         state: directory
     - copy:
         src: '../src/brew_tech_graph.php'
         dest: '/var/www/vhosts/brewsoftware.com.au/httpdocs/wp-content/plugins/brew_tech_graph/brew_tech_graph.php'
+        owner: brewsoftware
+        group: psacln
+        mode: 0644
+        backup: no
+    - copy:
+        src: '../dist/assets/app.js'
+        dest: '/var/www/vhosts/brewsoftware.com.au/httpdocs/wp-content/plugins/brew_tech_graph/app.js'
         owner: brewsoftware
         group: psacln
         mode: 0644
